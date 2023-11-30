@@ -1,7 +1,9 @@
 package com.web.diu.drink.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,15 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
-public class Category {
+public class CategoryParent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private int status;
-
-    @ManyToOne(targetEntity = CategoryParent.class)
-    @JoinColumn(name = "parent_Id", referencedColumnName = "id")
-    @JsonIgnore
-    private CategoryParent categoryParent;
 }
