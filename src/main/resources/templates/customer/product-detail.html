@@ -3,11 +3,37 @@
 <head th:replace="customer/head::head"></head>
 <body>
     <div th:replace="customer/header::header"></div>
-    <div th:replace="customer/banner::banner"></div>
-    <div th:replace="customer/gallery::gallery"></div>
-    <div th:replace="customer/service::service"></div>
-    <div th:replace="customer/testimonial::testimonial"></div>
-    <div th:replace="customer/contact::contact"></div>
+    <!-- gallery section start -->
+    <div th:fragment="gallery" class="gallery_section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="gallery_taital">Product Details</h1>
+                    <p class="gallery_text"></p>
+                </div>
+            </div>
+            <div class="">
+                <div class="gallery_section_2">
+                    <div class="row">
+                        <div class="col-md-4" data-animate-effect="fadeInLeft">
+                            <img th:src="${product.linkImg}" alt="Avatar" class="image">
+                        </div>
+                        <div class="col-md-5 col-md-push-1 animate-box">
+                            <div class="section-heading">
+                                <form th:action="@{/cart/{idProduct}(idProduct=${product.id})}" method="post">
+                                    <h2 th:text="${product.name}"></h2>
+                                    <p th:text="${product.description}"></p>
+                                    <h3>Price :<span th:text="'$' + ${product.price}"></span></h3>
+                                    <button class="main_bt" type="submit">Add to Cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- gallery section end -->
     <div th:replace="customer/footer::footer"></div>
 </body>
 </html>

@@ -3,11 +3,66 @@
 <head th:replace="customer/head::head"></head>
 <body>
     <div th:replace="customer/header::header"></div>
-    <div th:replace="customer/banner::banner"></div>
-    <div th:replace="customer/gallery::gallery"></div>
-    <div th:replace="customer/service::service"></div>
-    <div th:replace="customer/testimonial::testimonial"></div>
-    <div th:replace="customer/contact::contact"></div>
+    <!--================Cart Table Area =================-->
+    <section class="cart_table_area p_100">
+        <div class="container">
+            <form method="post" th:action="@{/cart/update}">
+                <div class="table-responsive" >
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Preview</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="cart : ${session.listCart}">
+                                <td>
+                                    <img th:src="${cart.product.linkImg}" alt="">
+                                    <input type="hidden" th:value="${cart.product.id}" name="idProduct"/>
+                                </td>
+                                <td th:text="${cart.product.name}"></td>
+                                <td th:text="${cart.product.price}"></td>
+                                <td>
+                                    <input th:min="1" th:max="${cart.product.amountleft}" th:value="${cart.quantity}" type="number" name="quantity">
+                                </td>
+                                <td th:text="${cart.total}"></td>
+                                <td> <a th:href="@{/delete/{idCart}(idCart=${cart.id})}">X</a></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <td>
+                            </td>
+                            <td></td>
+                            <td th:text="${totalAmount}">Total</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <button class="pest_btn" type="submit">Update</button>
+                            </td>
+                        </tfoot>
+                        <tbody>
+                            <div class="row cart_total_inner">
+                                <div class="col-lg-7"></div>
+                                <div class="col-lg-5">
+                                    <div class="cart_total_text">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
+
+            </form>
+        </div>
+    </section>
+    <!--================End Cart Table Area =================-->
+
     <div th:replace="customer/footer::footer"></div>
 </body>
 </html>

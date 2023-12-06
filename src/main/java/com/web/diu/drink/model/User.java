@@ -15,9 +15,5 @@ public class User {
     private int id;
     private String username,password;
     private String name, email;
-    private int isadmin=0;
-
-    @OneToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "cart_Id", referencedColumnName = "id")
-    private Cart shoppingCart;
+    private int isadmin = 0;
 }
